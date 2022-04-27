@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.sharedtasklist.databinding.FragmentNotificationsBinding
+import kotlinx.android.synthetic.main.fragment_notifications.*
 
 class NotificationsFragment : Fragment() {
 
@@ -29,9 +30,11 @@ class NotificationsFragment : Fragment() {
         val root: View = binding.root
 
         val textView: TextView = binding.textNotifications
+        val Test: TextView = binding.tTest
         notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+            textView.text = "Test"
         }
+
         return root
     }
 

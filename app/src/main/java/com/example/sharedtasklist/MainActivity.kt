@@ -41,7 +41,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    public override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser?.uid
 
+        if(currentUser != null){
+            //reload();
+        }
+    }
 
     fun clickSignIn(view: View) {
         var email = et_Email.text.toString()
@@ -53,17 +61,6 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(baseContext, "Please enter Email or Password", Toast.LENGTH_SHORT).show()
     }
 
-    public override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser?.uid
-
-        t_ID.text = currentUser.toString()
-        if(currentUser != null){
-            //reload();
-        }
-    }
-
     private fun signIn(email: String, password: String) {
         // [START sign_in_with_email]
         auth.signInWithEmailAndPassword(email, password)
@@ -72,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithEmail:success")
                     val user = auth.currentUser
-                    updateUI(user)
+                    //updateUI(user)
                     startHomeActivity()
                 } else {
                     // If sign in fails, display a message to the user.
@@ -80,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
 
-                    updateUI(null)
+                    //updateUI(null)
                 }
             }
         // [END sign_in_with_email]
@@ -98,7 +95,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateUI(user: FirebaseUser?) {
-        t_ID.text = user?.uid.toString()
 //        user?.getIdToken(true)?.addOnSuccessListener(this) { tokenResult ->
 //            val tokenID = tokenResult.token
 //            Log.d("TOKEN ID 1", tokenID.toString())

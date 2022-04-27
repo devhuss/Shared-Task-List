@@ -22,4 +22,9 @@
         android:name="com.example.sharedtasklist.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="com.example.sharedtasklist.ui.account.AccountFragment"
+        android:label="Account"
+        tools:layout="@layout/account_fragment" />
 </navigation>
