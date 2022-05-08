@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintSet
 import com.bumptech.glide.Glide
 import com.example.sharedtasklist.R
 import com.example.sharedtasklist.databinding.AccountFragmentBinding
@@ -72,6 +73,14 @@ class AccountFragment : Fragment() {
         accountViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
+//        val test = ConstraintSet()
+//        test.clone(binding.frameLayout)
+//        test.clear(R.id.t_text, ConstraintSet.START)
+//        test.clear(R.id.t_text, ConstraintSet.END)
+//        test.clear(R.id.t_text, ConstraintSet.TOP)
+//        test.clear(R.id.t_text, ConstraintSet.BOTTOM)
+//        test.applyTo(binding.frameLayout)
 
 
         return root
