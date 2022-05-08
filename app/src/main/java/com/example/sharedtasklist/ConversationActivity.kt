@@ -57,21 +57,7 @@ class ConversationActivity : AppCompatActivity() {
 
         iv_SendButton.setOnClickListener {
             sendMessage(id)
-
         }
-
-
-//        val options = FirebaseRecyclerOptions.Builder<ConvoMessage>()
-//            .setQuery(messagesRef, ConvoMessage::class.java)
-//            .build()
-//
-//        adapter = MessageAdapter(options, auth.currentUser?.displayName)
-//        val manager = LinearLayoutManager(this)
-//        manager.stackFromEnd = true
-//
-//        rv_Messages.adapter = adapter
-//        rv_Messages.layoutManager = manager
-
 
     }
 
@@ -81,12 +67,6 @@ class ConversationActivity : AppCompatActivity() {
         A: MessageAdapter,
         RV: RecyclerView
     ) {
-
-//        for (i in 1..20) {
-//            val test = ConvoMessage("Jhonny", "This is a message $i")
-//            M.add(test)
-//            A.notifyDataSetChanged()
-//        }
 
         var initial = false
 
