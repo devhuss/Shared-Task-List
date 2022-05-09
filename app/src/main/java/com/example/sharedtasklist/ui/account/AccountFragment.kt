@@ -11,11 +11,10 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sharedtasklist.R
 import com.example.sharedtasklist.databinding.AccountFragmentBinding
-import com.example.sharedtasklist.databinding.FragmentNotificationsBinding
-import com.example.sharedtasklist.ui.notifications.NotificationsViewModel
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
