@@ -45,12 +45,6 @@ class MessagesFragment : Fragment() {
     private lateinit var fireDB: FirebaseFirestore
     private lateinit var realDB: DatabaseReference
 
-//    companion object {
-//        fun newInstance() = MessagesFragment()
-//    }
-//
-//    private lateinit var viewModel: MessagesViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -95,21 +89,11 @@ class MessagesFragment : Fragment() {
             dialog.show()
         }
 
-//        messagesViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
 
         return root
     }
 
     private fun generateConversation( C: ArrayList<Conversation>, CA: ConversationAdapter) {
-
-
-//        for (i in 1..10) {
-//            val convo = Conversation("John Doe-$i","100", "text $i", R.drawable.ic_baseline_person_24)
-//            C.add(convo)
-//        }
-
 
         val userConvoRef = realDB.child("users").child(currentUser.uid).child("conversations")
         val convoListener = object : ValueEventListener {
@@ -147,8 +131,6 @@ class MessagesFragment : Fragment() {
 
                     }
                 }
-                //Log.d(TAG, convos.toString())
-//                RV.adapter = ConversationAdapter(C)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -160,23 +142,16 @@ class MessagesFragment : Fragment() {
         userConvoRef.addValueEventListener(convoListener)
         Log.d("END", C.toString())
 
-//        for (i in 1..size) {
-//            val convo = Conversation("John Doe-$i", "text $i", R.drawable.ic_baseline_person_24)
-//            conversations.add(convo)
-//        }
-//        // return the list of contacts
 
     }
 
     private fun createConvo(email: String) {
-//        fireDB = FirebaseFirestore.getInstance()
         fireDB.collection("users")
             .whereEqualTo("email", email)
             .get()
             .addOnSuccessListener { documents ->
                 if (!documents.isEmpty) {
                     for (document in documents) {
-//                        Log.d(TAG, document.id)
                         addConvoInDatabase(document.id)
                     }
                 } else {
@@ -187,10 +162,6 @@ class MessagesFragment : Fragment() {
                         .create()
                     dialog.show()
                 }
-
-
-//                        val data = database.child("users").child(userID).
-
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents: ", exception)
@@ -198,7 +169,6 @@ class MessagesFragment : Fragment() {
     }
 
     private fun addConvoInDatabase(user: String) {
-//        realDB = Firebase.database.reference
         val key = realDB.child("chats").push().key
 
         val currUserID = currentUser.uid.toString()
@@ -226,13 +196,6 @@ class MessagesFragment : Fragment() {
 
         realDB.updateChildren(databaseUpdate)
 
-//        Log.d(TAG, key)
     }
-
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-//        viewModel = ViewModelProvider(this).get(MessagesViewModel::class.java)
-//        // TODO: Use the ViewModel
-//    }
 
 }
