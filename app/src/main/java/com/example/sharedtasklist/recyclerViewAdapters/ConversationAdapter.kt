@@ -25,7 +25,6 @@ class ConversationAdapter(private val conversations: ArrayList<Conversation>, pr
         init {
             itemView.setOnClickListener {
                 val data = conversations[adapterPosition]
-                Toast.makeText(itemView.context, "You clicked ${data.id}.", Toast.LENGTH_SHORT).show()
                 val myIntent = Intent(context, ConversationActivity::class.java)
                     .putExtra("name", data.name)
                     .putExtra("id", data.id)

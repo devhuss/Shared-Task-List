@@ -2,14 +2,11 @@ package com.example.sharedtasklist
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sharedtasklist.dataClasses.Conversation
 import com.example.sharedtasklist.dataClasses.ConvoMessage
 import com.example.sharedtasklist.recyclerViewAdapters.MessageAdapter
-import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -18,8 +15,10 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.koushikdutta.ion.Ion
 import kotlinx.android.synthetic.main.activity_conversation.*
 import kotlinx.android.synthetic.main.activity_conversation.et_Message
+import org.json.JSONObject
 
 class ConversationActivity : AppCompatActivity() {
     val TAG = "CONVERSATION"
@@ -80,11 +79,6 @@ class ConversationActivity : AppCompatActivity() {
                     val text = message.child("message").value.toString()
                     val message = ConvoMessage(name, text)
                     M.add(message)
-//                    Log.d(TAG, message.child("name").value.toString())
-//                    val test: HashMap<String, String> = message.value as HashMap<String, String>
-//                    for (tests in test) {
-//                        Log.d(TAG, tests.toString())
-//                    }
 
                 }
 
@@ -92,7 +86,7 @@ class ConversationActivity : AppCompatActivity() {
                 Log.d(TAG, "NOPE")
             }
             A.notifyDataSetChanged()
-            RV.scrollToPosition(M.size-1)
+            RV.scrollToPosition(M.size - 1)
             initial = true
         }
 
@@ -107,12 +101,11 @@ class ConversationActivity : AppCompatActivity() {
                         M.add(message)
                     }
                     A.notifyDataSetChanged()
-                    RV.scrollToPosition(M.size-1)
+                    RV.scrollToPosition(M.size - 1)
                 }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
                 Log.w(
                     com.example.sharedtasklist.ui.messages.TAG,
                     "loadPost:onCancelled",
@@ -121,29 +114,30 @@ class ConversationActivity : AppCompatActivity() {
             }
         }
         convoRef.addValueEventListener(conversationListener)
-
-//        A.notifyDataSetChanged()
     }
 
     private fun sendMessage(id: String) {
         val message = et_Message.text
         if (message.isNotEmpty()) {
-            val messageRef = realDB.child("messages/$id")
-            val key = messageRef.push().key
-            val name = auth.currentUser?.displayName
+            val converted = message.toString().replace(" ", "%20")
+            Ion.with(this).load("https://www.purgomalum.com/service/plain?text=$converted").asString()
+                .setCallback { e, result ->
 
-            if (key == null) {
-                Log.w(TAG, "Couldn't get push key for messages")
-                return
-            }
+                    val messageRef = realDB.child("messages/$id")
+                    val key = messageRef.push().key
+                    val name = auth.currentUser?.displayName
 
-            val messageInfo = hashMapOf(
-                "name" to name.toString(),
-                "message" to message.toString()
-            )
+                    val messageInfo = hashMapOf(
+                        "name" to name.toString(),
+                        "message" to result
+                    )
 
-            messageRef.child(key).setValue(messageInfo)
-            message.clear()
+                    if (key != null) {
+                        messageRef.child(key).setValue(messageInfo)
+                    }
+                    message.clear()
+                }
+
         }
     }
 }
