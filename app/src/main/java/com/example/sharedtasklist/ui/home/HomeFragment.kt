@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sharedtasklist.HomeActivity
-import com.example.sharedtasklist.User
+//import com.example.sharedtasklist.User
 import com.example.sharedtasklist.databinding.FragmentHomeBinding
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -18,6 +18,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_home2.*
 import kotlinx.android.synthetic.main.fragment_home.*
+
 data class User(
     val Name: String = "",
     val Status : String = ""
