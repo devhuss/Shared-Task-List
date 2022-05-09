@@ -1,6 +1,7 @@
 package com.example.sharedtasklist.ui.notifications
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,10 +37,16 @@ class NotificationsFragment : Fragment() {
             textView.text = "Test"
         }
 
-        val database = Firebase.database
-        val myRef = database.getReference("Taco")
+        val database = Firebase.database.reference
+        val data = database.child("test").child("members").child("2").child("10").setValue("Test")
+//            .addOnSuccessListener {
+//                Log.i("FIREBASE", "Got value $it")
+//            }.addOnFailureListener {
+//            Log.e("firebase", "Error getting data", it)
+//        }
+//        Log.d("NOTIFY", data.toString())
 
-        myRef.setValue("Hello, Test!")
+//        myRef.setValue("Hello, Test!")
 
         return root
     }

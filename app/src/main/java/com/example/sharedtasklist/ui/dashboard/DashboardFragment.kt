@@ -20,7 +20,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 data class User(
-    val name: String = "",
+    val createdBy: String = "",
     val Status : String = ""
 )
 
