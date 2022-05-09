@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GetTokenResult
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -30,6 +31,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val db = Firebase.firestore
+
 
         // Initialize Firebase Auth
         auth = Firebase.auth
